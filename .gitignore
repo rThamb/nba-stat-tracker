@@ -3,3 +3,8 @@
 player-data-stream/.idea/
 player-data-stream/target/
 player-data-stream/player-data-stream.iml
+
+
+player-ranker/.idea/
+player-ranker/target/
+player-ranker/player-ranker.iml
