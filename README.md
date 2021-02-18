@@ -12,6 +12,8 @@ JSON Messages
 Web Socket Servers
 Angular 10
 
+## Plan
+![Screenshot](docs/nba-track.png.png)
 
 
 
