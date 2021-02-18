@@ -2,7 +2,7 @@ package model;
 
 import org.json.JSONObject;
 
-public class PlayerStat implements Jsonify{
+public class PlayerStat{
 
     private int rank;
     private String fname = "";
@@ -33,6 +33,34 @@ public class PlayerStat implements Jsonify{
 
     private double TOMade;
     private double TOSeasonAvg;
+
+    public PlayerStat(){}
+
+    public PlayerStat(JSONObject obj){
+
+        rank = obj.getInt("rank");
+        fname = obj.getString("fname");
+        lname = obj.getString("lname");
+        team = obj.getString("team");
+        position = obj.getString("pos");
+        FG_percent = obj.getDouble("fg_per");
+        FT_percent = obj.getDouble("ft_per");
+        threePtsMade = obj.getDouble("3pts");
+        threePtSeasonAvg = obj.getDouble("3pts_avg");
+        PtsMade = obj.getDouble("pts");
+        PtSeasonAvg = obj.getDouble("pts_avg");
+        AstMade = obj.getDouble("ast");
+        AstSeasonAvg = obj.getDouble("ast_avg");
+        RebMade = obj.getDouble("reb");
+        RebSeasonAvg = obj.getDouble("reb_avg");
+        StMade = obj.getDouble("st");
+        StSeasonAvg = obj.getDouble("st_avg");
+        BLKMade = obj.getDouble("blk");
+        BLKSeasonAvg = obj.getDouble("blk_avg");
+        TOMade = obj.getDouble("to");
+        TOSeasonAvg = obj.getDouble("to_avg");
+
+    }
 
     public int getRank() {
         return rank;
@@ -202,7 +230,6 @@ public class PlayerStat implements Jsonify{
         this.TOSeasonAvg = TOSeasonAvg;
     }
 
-    @Override
     public JSONObject toJson() {
         JSONObject obj = new JSONObject();
         obj.put("rank", rank);
