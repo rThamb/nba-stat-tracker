@@ -17,4 +17,14 @@ Angular 10
 
 
 
+## Setup
+
+Run consumers from most dependent to least
+
+1. Run web socket client
+2. Run player-ranker
+3. Run player-data-stream  
+
+
+
 Author: Renuchan Thambirajah
