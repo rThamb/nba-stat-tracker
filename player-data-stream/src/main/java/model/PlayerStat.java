@@ -2,6 +2,8 @@ package model;
 
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+
 public class PlayerStat implements Jsonify{
 
     private int rank;
@@ -228,4 +230,5 @@ public class PlayerStat implements Jsonify{
         obj.put("to_avg", TOSeasonAvg);
         return obj;
     }
+
 }

@@ -25,6 +25,7 @@ Run consumers from most dependent to least
 2. Run player-ranker
 3. Run player-data-stream  
 
-
+## API for Data
+https://sportsdata.io/developers/api-documentation/nba#/team-stats
 
 Author: Renuchan Thambirajah

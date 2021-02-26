@@ -10,7 +10,10 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
+import temp.FileWriter;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,7 +27,7 @@ public class PlayerAnalysisService {
     private String KAFKA_FORWARD_TOPIC = "forward-rank";
 
     public PlayerAnalysisService(){
-        this.kafkaClient = new KafkaClient();
+        //this.kafkaClient = new KafkaClient();
     }
 
     public void run(){
@@ -44,11 +47,9 @@ public class PlayerAnalysisService {
                         System.out.println(record.value());
                         List<PlayerStat> players = deserialize(record.value().toString());
 
-                        StatAnalyzer analysis = new StatAnalyzer(players);
-                        List<PlayerStat> guards = analysis.getGuardRanks();
-                        List<PlayerStat> forwards = analysis.getForwardRanks();
-                        produceMessage(KAFKA_GUARD_TOPIC, guards);
-                        //produceMessage(KAFKA_FORWARD_TOPIC, forwards);
+                        //StatAnalyzer analysis = new StatAnalyzer(players);
+                        //List<PlayerStat> guards = analysis.getRankedNBAPlayers();
+                        //produceMessage(KAFKA_GUARD_TOPIC, guards);
                     }
                 } else {
                     log.info("No Message");
@@ -60,7 +61,25 @@ public class PlayerAnalysisService {
 
     }
 
-    private List<PlayerStat> deserialize(String kafkaMessage){
+    public static void main(String[] args) throws Exception {
+
+        PlayerAnalysisService service = new PlayerAnalysisService();
+        service.mockRunner();
+
+    }
+
+    private void mockRunner() throws Exception {
+        String content = FileWriter.read();
+        List<PlayerStat> players = deserialize(content);
+        StatAnalyzer analysis = new StatAnalyzer(players);
+        List<PlayerStat> ranked_players = analysis.getRankedNBAPlayers();
+        return;
+
+
+    }
+
+    private List<PlayerStat> deserialize(String kafkaMessage) throws IOException {
+
         JSONArray playerJSON = new JSONArray(kafkaMessage);
         List<PlayerStat> players = new ArrayList<>();
         for(int i = 0; i < playerJSON.length(); i++){

@@ -1,15 +1,15 @@
 package engine;
 
 import data.PlayerRepo;
-import data.YahooPlayerData;
+import data.ApiPlayerData;
 import kafka.KafkaClient;
 import logger.MyLogger;
 import model.Jsonify;
 import model.PlayerStat;
 import org.json.JSONArray;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.util.List;
 
 public class PlayerDataProducer {
@@ -19,8 +19,8 @@ public class PlayerDataProducer {
     private PlayerRepo datacenter;
     private KafkaClient kafka;
 
-    public PlayerDataProducer(){
-        this.datacenter = new YahooPlayerData();
+    public PlayerDataProducer() throws IOException {
+        this.datacenter = new ApiPlayerData();
         this.kafka = new KafkaClient();
     }
 
