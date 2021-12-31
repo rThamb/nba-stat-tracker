@@ -19,6 +19,8 @@ public class PlayerDataProducer {
     private PlayerRepo datacenter;
     private KafkaClient kafka;
 
+    private static final int ITERATION_WAIT = 60000;
+
     public PlayerDataProducer() throws IOException {
         this.datacenter = new ApiPlayerData();
         this.kafka = new KafkaClient();
@@ -27,13 +29,26 @@ public class PlayerDataProducer {
     //polling process will pull data once a day
     public void run(){
 
-        log.info("** Getting Info from API **");
-        String producerRecord = serializerData(datacenter.getPlayers());
+        while(true) {
 
-        log.info("** Sending data to message broker **");
-        kafka.produceMessage(KAFKA_TOPIC, producerRecord);
+            log.info("** Getting Info from API **");
+            String producerRecord = serializerData(datacenter.getPlayers());
 
-        log.info("Iteration complete. Waiting for next period ...");
+            log.info("** Sending data to message broker **");
+            try {
+                kafka.produceMessage(KAFKA_TOPIC, producerRecord);
+            }catch (Exception e){
+                log.info("*** Failed to produce message to KAFKA ***");
+                e.printStackTrace();
+            }
+
+            log.info("Iteration complete. Waiting for next period ...");
+            try {
+                Thread.sleep(ITERATION_WAIT);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 

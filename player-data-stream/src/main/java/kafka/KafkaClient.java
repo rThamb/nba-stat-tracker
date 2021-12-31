@@ -10,7 +10,7 @@ import java.util.Properties;
 public class KafkaClient {
 
     private Logger log = MyLogger.getLogger();
-    private String bootstrapServers = "localhost:9092";
+    private String bootstrapServers = "localhost:29092";
     private Properties properties;
 
 

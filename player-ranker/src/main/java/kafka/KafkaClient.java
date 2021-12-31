@@ -11,7 +11,7 @@ import java.util.Properties;
 
 public class KafkaClient {
 
-    private String bootstrapServers = "localhost:9092";
+    private String bootstrapServers = "localhost:29092";
     private Properties propertiesProducer;
     private Properties propertiesConsumer;
 

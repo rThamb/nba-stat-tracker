@@ -27,7 +27,7 @@ public class PlayerAnalysisService {
     private String KAFKA_FORWARD_TOPIC = "forward-rank";
 
     public PlayerAnalysisService(){
-        //this.kafkaClient = new KafkaClient();
+        this.kafkaClient = new KafkaClient();
     }
 
     public void run(){
